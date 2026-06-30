@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: halal-exness-bot
+    runtime: node
+    buildCommand: yarn install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+    disk:
+      name: halal-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    healthCheckPath: /api/health
+    autoDeploy: true
